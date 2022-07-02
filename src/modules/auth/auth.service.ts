@@ -18,10 +18,11 @@ export class AuthService {
   ) {}
 
   async signToken(_id: string) {
-    const { authCode } = (await this.userModel
-      .findById(_id)
-      .select('authCode'))!
-
+    const user = await this.userModel.findById(_id).select('authCode')
+    if (!user) {
+      throw new BusinessException(ErrorCodeEnum.MasterLostError)
+    }
+    const authCode = user.authCode
     const payload = {
       _id,
       authCode,

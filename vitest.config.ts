@@ -1,8 +1,31 @@
+import { resolve } from 'path'
+import tsconfigPath from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
-import tsPaths from 'vite-tsconfig-paths'
+
 export default defineConfig({
-  plugins: [tsPaths()],
+  root: './test',
   test: {
-    setupFiles: ['./setupFile.ts'],
+    globals: true,
+    // globalSetup: [resolve(__dirname, './test/setup.ts')],
+    setupFiles: [resolve(__dirname, './test/setup-global.ts')],
+    environment: 'node',
+    includeSource: [resolve(__dirname, './test')],
   },
+  resolve: {
+    alias: {
+      // 'zx-cjs': 'node_modules/zx-cjs/global.js', // zx-cjs is the alias of zx
+    },
+  },
+  plugins: [
+    tsconfigPath({
+      projects: [resolve(__dirname, './test/tsconfig.json')],
+    }),
+
+    {
+      name: 'a-vitest-plugin-that-changes-config',
+      config: () => ({
+        test: { setupFiles: [resolve(__dirname, './test/setup-global.ts')] },
+      }),
+    },
+  ],
 })

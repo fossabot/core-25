@@ -50,6 +50,7 @@
     "test:e2e": "vitest -c ./vitest-e2e.config.ts",
     "test:all": "npm run test && npm run test:e2e",
     "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
     "test:cov": "vitest --coverage",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
@@ -108,6 +109,7 @@
     "@types/supertest": "2.0.12",
     "@types/ua-parser-js": "0.7.36",
     "@vercel/ncc": "0.33.4",
+    "@vitest/ui": "^0.16.0",
     "conventional-changelog": "^3.1.25",
     "cross-env": "7.0.3",
     "eslint": "*",
@@ -124,7 +126,7 @@
     "tsconfig-paths": "3.14.1",
     "typescript": "4.6.3",
     "vite-tsconfig-paths": "3.4.1",
-    "vitest": "0.9.3",
+    "vitest": "0.9.4",
     "webpack": "*",
     "webpack-node-externals": "3.0.0",
     "zx": "6.1.0"
